@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Circular Progress Bar | HTML | CSS | SVG | JS</title>
+</head>
+<style>
+    .track {
+        stroke-width: 1;
+        stroke: lightgrey;
+        fill: none;
+    }
+    
+    .progress {
+        stroke-width: 10;
+        stroke: rgb(59, 56, 56);
+        stroke-linecap: round;
+        fill: none;
+        transform: rotate(270deg);
+        transform-origin: center;
+    }
+</style>
+
+<body>
+    <svg width="250" height="250">
+      <circle r="100" cx="125" cy="125" class="track"></circle>
+      <circle r="100" cx="125" cy="125" class="progress"></circle>
+    </svg>
+
+</body>
+
+<script>
+    let progressCircle = document.querySelector(".progress");
+    let radius = progressCircle.r.baseVal.value;
+    //circumference of a circle = 2πr;
+    let circumference = radius * 2 * Math.PI;
+    progressCircle.style.strokeDasharray = circumference;
+
+    //0 to 100
+    setProgress(95);
+
+    function setProgress(percent) {
+        progressCircle.style.strokeDashoffset = circumference - (percent / 100) * circumference;
+    }
+</script>
+
+</html>
